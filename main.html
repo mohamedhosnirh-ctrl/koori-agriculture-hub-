@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>koori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<header>
+    <nav class="navbar">
+        <div class="koori-bg">
+            <span class="koori-logo">
+                <a href="main.html" class="link-logo">
+                <span class="koori-letter1">k</span>
+                <span class="koori-letter2">o</span>
+                <span class="koori-letter3">o</span>
+                <span class="koori-letter4">r</span>
+                <span class="koori-letter5">i</span>
+                </a>
+            </span>
+
+        </div>
+        <div class="nav-search">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-btn">search</button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="main.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="#" id="addItemLink">Add Item</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+        <div class="language-switcher">
+            <select id="languageSelect">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+                <option value="it">IT</option>
+            </select>
+        </div>
+    </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="7795383-uhd_3840_2160_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+        <h1 class="p1">Welcome to <span class="koori">koori</span></h1>
+        <p>Your trusted place for agricultural products</p>
+        <a href="products.html" class="hero-btn">Shop Now</a>
+    </div>
+</section>
+
+<!-- ═══ WHY KOORI ═══ -->
+<section class="why-section">
+    <div class="why-grid">
+        <div class="why-card">
+            <div class="why-icon">🌱</div>
+            <h3>100% Organic</h3>
+            <p>All products are naturally grown with no pesticides</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Fresh to your door within 24 hours of harvest</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">✅</div>
+            <h3>Quality Guaranteed</h3>
+            <p>Every product passes strict quality checks before shipping</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ OFFERS BANNER ═══ -->
+<section class="offers-section">
+    <div class="offers-content">
+        <div class="offers-text">
+            <span class="offers-tag">Limited Time</span>
+            <h2>Fresh Harvest Sale — Up to 40% Off!</h2>
+            <p>Stock up on seasonal vegetables and fruits at unbeatable prices.</p>
+            <a href="products.html" class="offers-btn">Grab the Deal</a>
+        </div>
+        <div class="countdown-box">
+            <p class="countdown-label">Offer ends in</p>
+            <div class="countdown">
+                <div class="cd-unit"><span id="cd-h">00</span><small>hrs</small></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><span id="cd-m">00</span><small>min</small></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><span id="cd-s">00</span><small>sec</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section class="categories-section" id="categories">
+    <div class="section-header">
+        <h2 class="section-title"><span class="title-line"></span>Categories<span class="title-line"></span></h2>
+        <p class="section-sub">تسوق حسب التصنيف</p>
+    </div>
+    <div class="categories-grid">
+        <a href="categories.html?cat=vegetables" class="cat-card">
+            <div class="cat-emoji">🥦</div>
+            <span>Vegetables</span>
+        </a>
+        <a href="categories.html?cat=fruits" class="cat-card">
+            <div class="cat-emoji">🍎</div>
+            <span>Fruits</span>
+        </a>
+        <a href="categories.html?cat=grains" class="cat-card">
+            <div class="cat-emoji">🌾</div>
+            <span>Grains</span>
+        </a>
+        <a href="categories.html?cat=dairy" class="cat-card">
+            <div class="cat-emoji">🥛</div>
+            <span>Dairy</span>
+        </a>
+        <a href="categories.html?cat=herbs" class="cat-card">
+            <div class="cat-emoji">🌿</div>
+            <span>Herbs</span>
+        </a>
+        <a href="categories.html?cat=honey" class="cat-card">
+            <div class="cat-emoji">🍯</div>
+            <span>Honey</span>
+        </a>
+    </div>
+</section>
+
+
+<!-- ═══ AGRICULTURAL CATEGORIES ═══ -->
+<section class="featured" id="featured">
+
+    <div class="section-header">
+        <h2 class="section-title">
+            <span class="title-line"></span>
+            Agricultural Categories
+            <span class="title-line"></span>
+        </h2>
+
+        <p class="section-sub">
+            Choose the category you're looking for
+        </p>
+    </div>
+
+    <div class="products-grid">
+
+        <a href="cows.html" class="product-card category-card">
+            <div class="product-img">
+                🐄
+            </div>
+            <div class="product-info">
+                <h3>Cows & Bulls</h3>
+                <p>Buy and sell cattle products</p>
+            </div>
+        </a>
+
+        <a href="sheep.html" class="product-card category-card">
+            <div class="product-img">
+                🐑
+            </div>
+            <div class="product-info">
+                <h3>Sheep</h3>
+                <p>Browse sheep listings</p>
+            </div>
+        </a>
+
+        <a href="goats.html" class="product-card category-card">
+            <div class="product-img">
+                🐐
+            </div>
+            <div class="product-info">
+                <h3>Goats</h3>
+                <p>Find goat products and livestock</p>
+            </div>
+        </a>
+
+        <a href="poultry.html" class="product-card category-card">
+            <div class="product-img">
+                🐔
+            </div>
+            <div class="product-info">
+                <h3>Poultry</h3>
+                <p>Chicken, ducks and more</p>
+            </div>
+        </a>
+
+        <a href="medicines.html" class="product-card category-card">
+            <div class="product-img">
+                💊
+            </div>
+            <div class="product-info">
+                <h3>Agricultural Medicines</h3>
+                <p>Veterinary and farm treatments</p>
+            </div>
+        </a>
+
+        <a href="feed.html" class="product-card category-card">
+            <div class="product-img">
+                🌾
+            </div>
+            <div class="product-info">
+                <h3>Animal Feed</h3>
+                <p>Nutrition for livestock</p>
+            </div>
+        </a>
+
+        <a href="equipment.html" class="product-card category-card">
+            <div class="product-img">
+                🚜
+            </div>
+            <div class="product-info">
+                <h3>Farm Equipment</h3>
+                <p>Machines and tools</p>
+            </div>
+        </a>
+
+        <a href="fertilizers.html" class="product-card category-card">
+            <div class="product-img">
+                🌱
+            </div>
+            <div class="product-info">
+                <h3>Seeds & Fertilizers</h3>
+                <p>Everything for cultivation</p>
+            </div>
+        </a>
+
+    </div>
+    <div class="featured-cta">
+        <a href="products.html" class="see-all-btn">See All Listings →</a>
+    </div>
+
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section">
+    <div class="section-header">
+        <h2 class="section-title"><span class="title-line"></span>How It Works<span class="title-line"></span></h2>
+        <p class="section-sub">3 خطوات بسيطة</p>
+    </div>
+    <div class="how-grid">
+        <div class="how-step">
+            <div class="how-num">1</div>
+            <div class="how-icon">🛒</div>
+            <h3>Browse & Choose</h3>
+            <p>Explore our fresh products and pick what you need</p>
+        </div>
+        <div class="how-arrow">→</div>
+        <div class="how-step">
+            <div class="how-num">2</div>
+            <div class="how-icon">📦</div>
+            <h3>Place Your Order</h3>
+            <p>Add to cart and checkout in seconds</p>
+        </div>
+        <div class="how-arrow">→</div>
+        <div class="how-step">
+            <div class="how-num">3</div>
+            <div class="how-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Receive fresh products right at your doorstep</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials-section">
+    <div class="section-header">
+        <h2 class="section-title"><span class="title-line"></span>What Our Customers Say<span class="title-line"></span></h2>
+        <p class="section-sub">آراء عملائنا</p>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">"Amazing quality! The vegetables were so fresh, I could tell the difference immediately."</p>
+            <div class="testi-author">
+                <div class="testi-avatar">S</div>
+                <div>
+                    <strong>Sara M.</strong>
+                    <span>Algiers</span>
+                </div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-text">"Fast delivery and great prices. koori is my go-to for all farm products now!"</p>
+            <div class="testi-author">
+                <div class="testi-avatar">K</div>
+                <div>
+                    <strong>Karim B.</strong>
+                    <span>Oran</span>
+                </div>
+            </div>
+        </div>
+        <div class="testi-card">
+            <div class="testi-stars">★★★★☆</div>
+            <p class="testi-text">"Love the variety of products. The herbs bundle is especially great for cooking!"</p>
+            <div class="testi-author">
+                <div class="testi-avatar">L</div>
+                <div>
+                    <strong>Lina T.</strong>
+                    <span>Constantine</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="newsletter-section">
+    <div class="newsletter-box">
+        <div class="newsletter-icon">📬</div>
+        <h2>Get Exclusive Offers</h2>
+        <p>Subscribe and be the first to know about fresh arrivals and weekly deals</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+        <p class="newsletter-note" id="newsletterMsg"></p>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <span class="koori">koori</span>
+            <p>Your trusted place for fresh agricultural products, delivered with care.</p>
+            <div class="footer-socials">
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+                <a href="#">🐦</a>
+            </div>
+        </div>
+        <div class="footer-links-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+        <div class="footer-links-col">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Returns</a></li>
+            </ul>
+        </div>
+        <div class="footer-links-col">
+            <h4>Contact</h4>
+            <ul>
+                <li>📧 hello@koori.com</li>
+                <li>📞 +393285807321</li>
+                <li>📍 Italia</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 koori. All rights reserved.</p>
+    </div>
+</footer>
+<!-- toast -->
+<div class="cart-toast" id="cartToast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
