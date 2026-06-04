@@ -40,7 +40,7 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 | Page | Description |
 |------|-------------|
-| 🏠 Home (`index.html`) | Landing page and featured products |
+| 🏠 Home | Landing page and featured products |
 | 🛒 Products | Browse all available items |
 | 📂 Categories | Filter products by category |
 | ➕ Add Item | Submit a new product listing |
