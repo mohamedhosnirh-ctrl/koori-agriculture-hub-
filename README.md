@@ -16,7 +16,7 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#-overview)
 - [Pages](#-pages)
@@ -29,13 +29,13 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ---
 
-## 🌱 Overview
+## Overview
 
 **koori** is a modern, scalable web marketplace designed for agricultural products. Each page follows a clean separation of concerns — its own HTML, CSS, and JavaScript — with PHP and MySQL integration coming in future releases.
 
 ---
 
-## 📄 Pages
+## Pages
 
 | Page | Description |
 |------|-------------|
@@ -49,7 +49,7 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 koori/
@@ -69,7 +69,7 @@ koori/
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 > MySQL integration is planned. The following tables will be used:
 
@@ -84,7 +84,7 @@ images      (id, product_id, path)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Frontend Preview
 
@@ -105,7 +105,7 @@ open koori/home.html
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -118,7 +118,7 @@ open koori/home.html
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] PHP authentication system (login/register)
 - [ ] MySQL integration for all pages
@@ -130,13 +130,13 @@ open koori/home.html
 
 ---
 
-## 👤 Author
+## Author
 
 **Rayen**  
 Feel free to open issues or submit pull requests!
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE) — free to use and modify.
