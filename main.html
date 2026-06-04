@@ -9,38 +9,41 @@
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
-<header>
-    <nav class="navbar">
+<header role="banner">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="koori-bg">
             <span class="koori-logo">
-                <a href="main.html" class="link-logo">
-                <span class="koori-letter1">k</span>
-                <span class="koori-letter2">o</span>
-                <span class="koori-letter3">o</span>
-                <span class="koori-letter4">r</span>
-                <span class="koori-letter5">i</span>
+                <a href="main.html" class="link-logo" aria-label="koori home">
+                <span class="koori-letter1" aria-hidden="true">k</span>
+                <span class="koori-letter2" aria-hidden="true">o</span>
+                <span class="koori-letter3" aria-hidden="true">o</span>
+                <span class="koori-letter4" aria-hidden="true">r</span>
+                <span class="koori-letter5" aria-hidden="true">i</span>
                 </a>
             </span>
 
         </div>
         <div class="search-box">
-        <input type="text" placeholder="Search products…" id="navSearch"/>
+        <input type="text" placeholder="Search products…" id="navSearch" aria-label="Search products" autocomplete="off"/>
         <button type="reset" aria-label="Clear search"></button>
+        <div class="search-results" id="searchResults" role="listbox" aria-label="Search suggestions"></div>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-links" role="list">
             <li><a href="main.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
             <li><a href="categories.html">Categories</a></li>
             <li><a href="#" id="addItemLink">Add Item</a></li>
-            <li><a href="cart.html">Cart</a></li>
+            <li><a href="cart.html">Cart <span id="cartCount" aria-live="polite" aria-label="items in cart"></span></a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
+        <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
         <div class="nav-icons">
             <a href="login.html" class="login-btn">Login</a>
         </div>
         <div class="language-switcher">
-            <select id="languageSelect">
+            <select id="languageSelect" aria-label="Select language">
                 <option value="en">EN</option>
                 <option value="fr">FR</option>
                 <option value="ar">AR</option>
@@ -48,13 +51,27 @@
             </select>
         </div>
     </nav>
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="main.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="#" id="addItemLinkMobile">Add Item</a>
+        <a href="cart.html">Cart</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
 </header>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
+<main id="main-content">
+
+<!--HERO -->
+<section class="hero" aria-label="Welcome banner">
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
         <source src="7795383-uhd_3840_2160_30fps.mp4" type="video/mp4">
     </video>
+    <!-- Decorative leaves shown when no video -->
+    <div class="hero-leaves" aria-hidden="true" id="heroLeaves"></div>
     <div class="hero-content">
         <h1 class="p1">Welcome to <span class="koori">koori</span></h1>
         <p>Your trusted place for agricultural products</p>
@@ -62,8 +79,8 @@
     </div>
 </section>
 
-<!-- ═══ WHY KOORI ═══ -->
-<section class="why-section">
+<!--WHY KOORI-->
+<section class="why-section" aria-label="Why choose koori">
     <div class="why-grid">
         <div class="why-card">
             <div class="why-icon">🌱</div>
@@ -83,8 +100,8 @@
     </div>
 </section>
 
-<!-- ═══ OFFERS BANNER ═══ -->
-<section class="offers-section">
+<!--OFFERS BANNER-->
+<section class="offers-section" aria-label="Current offers and deals">
     <div class="offers-content">
         <div class="offers-text">
             <span class="offers-tag">Limited Time</span>
@@ -105,11 +122,11 @@
     </div>
 </section>
 
-<!-- ═══ CATEGORIES ═══ -->
+<!--CATEGORIES-->
 <section class="categories-section" id="categories">
     <div class="section-header">
         <h2 class="section-title"><span class="title-line"></span>Categories<span class="title-line"></span></h2>
-        <p class="section-sub">تسوق حسب التصنيف</p>
+        <p class="section-sub">Shop by Category</p>
     </div>
     <div class="categories-grid">
         <a href="categories.html?cat=vegetables" class="cat-card">
@@ -140,7 +157,7 @@
 </section>
 
 
-<!-- ═══ AGRICULTURAL CATEGORIES ═══ -->
+<!-- AGRICULTURAL CATEGORIES-->
 <section class="featured" id="featured">
 
     <div class="section-header">
@@ -244,11 +261,11 @@
 
 </section>
 
-<!-- ═══ HOW IT WORKS ═══ -->
+<!--HOW IT WORKS -->
 <section class="how-section">
     <div class="section-header">
         <h2 class="section-title"><span class="title-line"></span>How It Works<span class="title-line"></span></h2>
-        <p class="section-sub">3 خطوات بسيطة</p>
+        <p class="section-sub">3 Simple Steps</p>
     </div>
     <div class="how-grid">
         <div class="how-step">
@@ -274,7 +291,7 @@
     </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
+<!--TESTIMONIALS -->
 <section class="testimonials-section">
     <div class="section-header">
         <h2 class="section-title"><span class="title-line"></span>What Our Customers Say<span class="title-line"></span></h2>
@@ -318,21 +335,23 @@
 </section>
 
 <!-- ═══ NEWSLETTER ═══ -->
-<section class="newsletter-section">
+<section class="newsletter-section" aria-label="Newsletter signup">
     <div class="newsletter-box">
-        <div class="newsletter-icon">📬</div>
+        <div class="newsletter-icon" aria-hidden="true">📬</div>
         <h2>Get Exclusive Offers</h2>
         <p>Subscribe and be the first to know about fresh arrivals and weekly deals</p>
-        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-            <input type="email" id="newsletterEmail" placeholder="your@email.com" class="newsletter-input" required>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)" novalidate>
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" class="newsletter-input" required aria-label="Email address for newsletter">
             <button type="submit" class="newsletter-btn">Subscribe</button>
         </form>
-        <p class="newsletter-note" id="newsletterMsg"></p>
+        <p class="newsletter-note" id="newsletterMsg" role="status" aria-live="polite"></p>
     </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="footer">
+</main>
+
+<!--FOOTER -->
+<footer class="footer" role="contentinfo">
     <div class="footer-grid">
         <div class="footer-brand">
             <span class="koori">koori</span>
@@ -375,7 +394,7 @@
     </div>
 </footer>
 <!-- toast -->
-<div class="cart-toast" id="cartToast"></div>
+<div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
 <script src="main.js"></script>
 </body>

@@ -1,25 +1,129 @@
-// koori — main.js (fixed)
-
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ── ADD ITEM LINK ──
+  //HERO LEAVES (fallback decoration)
+  const video = document.querySelector(".hero-video");
+  const leavesContainer = document.getElementById("heroLeaves");
+  const emojis = ["🌿","🌱","🍃","🌾","🌻","🍀"];
+  function spawnLeaves() {
+    if (!leavesContainer) return;
+    for (let i = 0; i < 12; i++) {
+      const leaf = document.createElement("span");
+      leaf.className = "hero-leaf";
+      leaf.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      leaf.style.left = Math.random() * 100 + "%";
+      leaf.style.animationDuration = (8 + Math.random() * 10) + "s";
+      leaf.style.animationDelay = (Math.random() * 10) + "s";
+      leaf.style.fontSize = (1.2 + Math.random() * 1.5) + "rem";
+      leavesContainer.appendChild(leaf);
+    }
+  }
+  if (video) {
+    video.addEventListener("error", spawnLeaves);
+    // If video doesn't load quickly, show leaves anyway
+    setTimeout(() => {
+      if (video.readyState === 0) spawnLeaves();
+    }, 800);
+  } else {
+    spawnLeaves();
+  }
+
+  // MOBILE HAMBURGER
+  const hamburger = document.getElementById("hamburgerBtn");
+  const mobileNav = document.getElementById("mobileNav");
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      hamburger.setAttribute("aria-expanded", isOpen);
+    });
+    document.addEventListener("click", (e) => {
+      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  //SEARCH FUNCTIONALITY
+  const searchData = [
+    { name: "Vegetables", emoji: "🥦", href: "categories.html?cat=vegetables" },
+    { name: "Fruits",     emoji: "🍎", href: "categories.html?cat=fruits" },
+    { name: "Grains",     emoji: "🌾", href: "categories.html?cat=grains" },
+    { name: "Dairy",      emoji: "🥛", href: "categories.html?cat=dairy" },
+    { name: "Herbs",      emoji: "🌿", href: "categories.html?cat=herbs" },
+    { name: "Honey",      emoji: "🍯", href: "categories.html?cat=honey" },
+    { name: "Cows & Bulls",         emoji: "🐄", href: "cows.html" },
+    { name: "Sheep",                emoji: "🐑", href: "sheep.html" },
+    { name: "Goats",                emoji: "🐐", href: "goats.html" },
+    { name: "Poultry",              emoji: "🐔", href: "poultry.html" },
+    { name: "Agricultural Medicines", emoji: "💊", href: "medicines.html" },
+    { name: "Animal Feed",          emoji: "🌾", href: "feed.html" },
+    { name: "Farm Equipment",       emoji: "🚜", href: "equipment.html" },
+    { name: "Seeds & Fertilizers",  emoji: "🌱", href: "fertilizers.html" },
+    { name: "Fresh Herbs Bundle",   emoji: "🌿", href: "products.html" },
+    { name: "Sweet Corn",           emoji: "🌽", href: "products.html" },
+    { name: "Organic Tomatoes",     emoji: "🍅", href: "products.html" },
+    { name: "Baby Carrots",         emoji: "🥕", href: "products.html" },
+  ];
+
+  const navSearch = document.getElementById("navSearch");
+  const searchResults = document.getElementById("searchResults");
+
+  if (navSearch && searchResults) {
+    navSearch.addEventListener("input", function () {
+      const q = this.value.trim().toLowerCase();
+      if (!q) { searchResults.classList.remove("open"); return; }
+      const matches = searchData.filter(item => item.name.toLowerCase().includes(q)).slice(0, 6);
+      if (matches.length === 0) {
+        searchResults.innerHTML = `<div class="search-no-results">No results for "${this.value}"</div>`;
+      } else {
+        searchResults.innerHTML = matches.map(m =>
+          `<a class="search-result-item" href="${m.href}">
+            <span class="search-result-emoji">${m.emoji}</span>${m.name}
+          </a>`
+        ).join("");
+      }
+      searchResults.classList.add("open");
+    });
+
+    navSearch.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { searchResults.classList.remove("open"); this.blur(); }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navSearch.closest(".search-box").contains(e.target)) {
+        searchResults.classList.remove("open");
+      }
+    });
+
+    // clear button also closes results
+    const clearBtn = navSearch.closest(".search-box").querySelector("button[type='reset']");
+    if (clearBtn) clearBtn.addEventListener("click", () => {
+      searchResults.classList.remove("open");
+    });
+  }
+
+  //ADD ITEM LINK
   const addItemLink = document.getElementById("addItemLink");
   if (addItemLink) {
     if (localStorage.getItem("loggedIn") !== "true") {
       addItemLink.style.opacity = "0.5";
       addItemLink.style.cursor = "not-allowed";
+      addItemLink.setAttribute("aria-disabled", "true");
     }
     addItemLink.addEventListener("click", function (e) {
       e.preventDefault();
-      if (localStorage.getItem("loggedIn") === "true") {
-        window.location.href = "add-product.html";
-      } else {
-        window.location.href = "login.html";
-      }
+      window.location.href = localStorage.getItem("loggedIn") === "true" ? "add-product.html" : "login.html";
+    });
+  }
+  const addItemLinkMobile = document.getElementById("addItemLinkMobile");
+  if (addItemLinkMobile) {
+    addItemLinkMobile.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = localStorage.getItem("loggedIn") === "true" ? "add-product.html" : "login.html";
     });
   }
 
-  // ── LANGUAGE ──
+  //LANGUAGE
   const langSelect = document.getElementById("languageSelect");
   if (langSelect) {
     const savedLang = localStorage.getItem("siteLanguage") || "en";
@@ -32,17 +136,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── COUNTDOWN ──
   startCountdown(6 * 60 * 60);
 
-  // ── CART COUNT ──
   updateCartCount();
 
 });
 
-// ════════════════════════
 // TRANSLATIONS
-// ════════════════════════
 const translations = {
   en: {
     // navbar
@@ -145,7 +245,7 @@ const translations = {
     footer_shipping:   "Shipping Policy",
     footer_returns:    "Returns",
     footer_contactus:  "Contact Us",
-    footer_copy:       "© 2025 koori. All rights reserved."
+    footer_copy:       "© 2026 koori. All rights reserved."
   },
 
   fr: {
@@ -431,9 +531,7 @@ const translations = {
   }
 };
 
-// ════════════════════════
-// APPLY LANGUAGE  (single function — no duplicate)
-// ════════════════════════
+// APPLY LANGUAGE
 function applyLanguage(lang) {
   const t = translations[lang] || translations.en;
 
@@ -461,7 +559,7 @@ function applyLanguage(lang) {
     if (el && t[key] !== undefined) el.setAttribute(attr, t[key]);
   }
 
-  // ── NAVBAR ──
+  //NAVBAR
   setText(".nav-links li:nth-child(1) a",  "nav_home");
   setText(".nav-links li:nth-child(2) a",  "nav_products");
   setText(".nav-links li:nth-child(3) a",  "nav_categories");
@@ -472,7 +570,7 @@ function applyLanguage(lang) {
   setText(".search-btn",                   "nav_search_btn");
   setAttr(".search-input", "placeholder",  "nav_search_ph");
 
-  // ── HERO ──
+  // HERO
   const h1 = document.querySelector(".hero-content h1");
   if (h1) {
     const kooriSpan = h1.querySelector(".koori") || document.createElement("span");
@@ -490,7 +588,7 @@ function applyLanguage(lang) {
   setText(".hero-content p", "hero_desc");
   setText(".hero-btn",       "hero_btn");
 
-  // ── WHY KOORI ──
+  //WHY KOORI
   const whyCards = document.querySelectorAll(".why-card");
   if (whyCards[0]) {
     whyCards[0].querySelector("h3").textContent = t.why_organic_title;
@@ -505,16 +603,14 @@ function applyLanguage(lang) {
     whyCards[2].querySelector("p").textContent  = t.why_quality_desc;
   }
 
-  // ── OFFERS BANNER ──
   setText(".offers-tag",        "offers_tag");
   setText(".offers-text h2",    "offers_title");
   setText(".offers-text p",     "offers_desc");
   setText(".offers-btn",        "offers_btn");
   setText(".countdown-label",   "offers_ends");
 
-  // ── CATEGORIES ──
+  //CATEGORIES
   const catTitles = document.querySelectorAll(".section-title");
-  // target by section parent to avoid collisions
   const catSection = document.querySelector(".categories-section");
   if (catSection) {
     const title = catSection.querySelector(".section-title");
@@ -566,7 +662,7 @@ function applyLanguage(lang) {
   });
   document.querySelectorAll(".product-badge.sale").forEach(b => { b.textContent = t.badge_sale; });
 
-  // ── HOW IT WORKS ──
+  //HOW IT WORKS
   const howSection = document.querySelector(".how-section");
   if (howSection) {
     const title = howSection.querySelector(".section-title");
@@ -589,7 +685,7 @@ function applyLanguage(lang) {
     if (p)  p.textContent  = t[howData[i].desc];
   });
 
-  // ── TESTIMONIALS ──
+  //TESTIMONIALS
   const testiSection = document.querySelector(".testimonials-section");
   if (testiSection) {
     const title = testiSection.querySelector(".section-title");
@@ -613,13 +709,13 @@ function applyLanguage(lang) {
     if (locEl)    locEl.textContent    = t[testiData[i].loc];
   });
 
-  // ── NEWSLETTER ──
+  //NEWSLETTER
   setText(".newsletter-box h2",  "news_title");
   setText(".newsletter-box > p", "news_desc");
   setText(".newsletter-btn",     "news_btn");
   setAttr(".newsletter-input", "placeholder", "news_ph");
 
-  // ── FOOTER ──
+  //FOOTER 
   setText(".footer-brand p",          "footer_desc");
   const footerCols = document.querySelectorAll(".footer-links-col");
   if (footerCols[0]) {
@@ -644,9 +740,7 @@ function applyLanguage(lang) {
   setText(".footer-bottom p", "footer_copy");
 }
 
-// ════════════════════════
 // COUNTDOWN
-// ════════════════════════
 function startCountdown(totalSeconds) {
   const hEl = document.getElementById("cd-h");
   const mEl = document.getElementById("cd-m");
@@ -673,9 +767,7 @@ function startCountdown(totalSeconds) {
   tick();
 }
 
-// ════════════════════════
 // CART
-// ════════════════════════
 function addToCart(btn, productName) {
   const cart = JSON.parse(localStorage.getItem("kooriCart") || "[]");
   const existing = cart.find(i => i.name === productName);
@@ -718,9 +810,7 @@ function updateCartCount() {
   }
 }
 
-// ════════════════════════
 // NEWSLETTER
-// ════════════════════════
 function subscribeNewsletter(e) {
   e.preventDefault();
   const email = document.getElementById("newsletterEmail").value.trim();
