@@ -11,12 +11,13 @@ A clean, modular web platform for managing and browsing agricultural products �
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 </div>
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
 - [Overview](#-overview)
 - [Pages](#-pages)
@@ -29,13 +30,13 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ---
 
-## Overview
+## 🌱 Overview
 
 **koori** is a modern, scalable web marketplace designed for agricultural products. Each page follows a clean separation of concerns — its own HTML, CSS, and JavaScript — with PHP and MySQL integration coming in future releases.
 
 ---
 
-## Pages
+## 📄 Pages
 
 | Page | Description |
 |------|-------------|
@@ -49,7 +50,7 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 koori/
@@ -69,7 +70,7 @@ koori/
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 > MySQL integration is planned. The following tables will be used:
 
@@ -84,7 +85,7 @@ images      (id, product_id, path)
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Frontend Preview
 
@@ -105,7 +106,7 @@ open koori/home.html
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -118,7 +119,7 @@ open koori/home.html
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 - [ ] PHP authentication system (login/register)
 - [ ] MySQL integration for all pages
@@ -130,13 +131,15 @@ open koori/home.html
 
 ---
 
-##  Author
+## 👤 Author
 
 **Rayen**  
 Feel free to open issues or submit pull requests!
 
 ---
 
-##  License
+## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) — free to use and modify.
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
+
+You are free to use, modify, and distribute this software, but any derivative work **must also be released under the GPL**. See the [LICENSE](LICENSE) file for full details.
