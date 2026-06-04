@@ -91,7 +91,7 @@ images      (id, product_id, path)
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/koori.git
+git clone https://github.com/mohamedhosnirh-ctrl/koori-agriculture-hub-.git
 
 # Open in your browser
 open koori/home.html
