@@ -40,7 +40,7 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 | Page | Description |
 |------|-------------|
-| 🏠 Home | Landing page and featured products |
+| 🏠 Home (`index.html`) | Landing page and featured products |
 | 🛒 Products | Browse all available items |
 | 📂 Categories | Filter products by category |
 | ➕ Add Item | Submit a new product listing |
@@ -54,19 +54,23 @@ A clean, modular web platform for managing and browsing agricultural products �
 
 ```
 koori/
-├── home.html / home.css / home.js / home.php
-├── products.html / products.css / products.js / products.php
-├── categories.html / categories.css / categories.js / categories.php
-├── add-item.html / add-item.css / add-item.js / add-item.php
-├── cart.html / cart.css / cart.js / cart.php
-├── contact.html / contact.css / contact.js / contact.php
-├── login.html / login.css / login.js / login.php
+├── index.html          # Entry point (landing page)
+├── main.css            # Global styles
+├── main.js             # App logic (search, cart, i18n, etc.)
+├── LICENSE
+├── README.md
+├── products.html       # (planned)
+├── categories.html     # (planned)
+├── add-item.html       # (planned)
+├── cart.html           # (planned)
+├── contact.html        # (planned)
+├── login.html          # (planned)
 └── assets/
     ├── images/
     └── icons/
 ```
 
-> Each page is fully self-contained with its own HTML, CSS, and JS file. PHP files handle backend logic (planned).
+> The app uses a single-page entry (`index.html`) with shared `main.css` and `main.js`. Future pages will follow the file-per-page pattern with PHP backend.
 
 ---
 
@@ -94,15 +98,24 @@ images      (id, product_id, path)
 git clone https://github.com/mohamedhosnirh-ctrl/koori-agriculture-hub-.git
 
 # Open in your browser
-open koori/home.html
+open koori/index.html
 ```
+
+### Deploy on GitHub Pages
+
+This site is fully static and ready for [GitHub Pages](https://pages.github.com/):
+
+1. Push the repository to GitHub
+2. Go to **Settings → Pages**
+3. Under **Branch**, select `main` and save
+4. Your site will be live at `https://<username>.github.io/koori-agriculture-hub-/`
 
 ### Full Stack (PHP + MySQL)
 
 1. Move the project folder into your XAMPP `htdocs/` directory
 2. Start **Apache** and **MySQL** from the XAMPP control panel
 3. Import `koori.sql` into phpMyAdmin *(available in a future release)*
-4. Visit `http://localhost/koori/home.html`
+4. Visit `http://localhost/koori/index.html`
 
 ---
 
