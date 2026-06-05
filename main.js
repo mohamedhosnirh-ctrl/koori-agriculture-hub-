@@ -44,56 +44,55 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //SEARCH FUNCTIONALITY
-  const searchData = [
-    { name: "Vegetables", emoji: "🥦", href: "categories.html?cat=vegetables" },
-    { name: "Fruits",     emoji: "🍎", href: "categories.html?cat=fruits" },
-    { name: "Grains",     emoji: "🌾", href: "categories.html?cat=grains" },
-    { name: "Dairy",      emoji: "🥛", href: "categories.html?cat=dairy" },
-    { name: "Herbs",      emoji: "🌿", href: "categories.html?cat=herbs" },
-    { name: "Honey",      emoji: "🍯", href: "categories.html?cat=honey" },
-    { name: "Cows & Bulls",         emoji: "🐄", href: "cows.html" },
-    { name: "Sheep",                emoji: "🐑", href: "sheep.html" },
-    { name: "Goats",                emoji: "🐐", href: "goats.html" },
-    { name: "Poultry",              emoji: "🐔", href: "poultry.html" },
-    { name: "Agricultural Medicines", emoji: "💊", href: "medicines.html" },
-    { name: "Animal Feed",          emoji: "🌾", href: "feed.html" },
-    { name: "Farm Equipment",       emoji: "🚜", href: "equipment.html" },
-    { name: "Seeds & Fertilizers",  emoji: "🌱", href: "fertilizers.html" },
-    { name: "Fresh Herbs Bundle",   emoji: "🌿", href: "products.html" },
-    { name: "Sweet Corn",           emoji: "🌽", href: "products.html" },
-    { name: "Organic Tomatoes",     emoji: "🍅", href: "products.html" },
-    { name: "Baby Carrots",         emoji: "🥕", href: "products.html" },
-  ];
+const searchData = [
+  { name: "Vegetables",   nameAr: "خضروات",          emoji: "🥦", href: "categories.html?cat=vegetables" },
+  { name: "Fruits",       nameAr: "فواكه",            emoji: "🍎", href: "categories.html?cat=fruits" },
+  { name: "Grains",       nameAr: "حبوب",             emoji: "🌾", href: "categories.html?cat=grains" },
+  { name: "Dairy",        nameAr: "ألبان",            emoji: "🥛", href: "categories.html?cat=dairy" },
+  { name: "Herbs",        nameAr: "أعشاب",            emoji: "🌿", href: "categories.html?cat=herbs" },
+  { name: "Honey",        nameAr: "عسل",              emoji: "🍯", href: "categories.html?cat=honey" },
+  { name: "Cows & Bulls", nameAr: "أبقار وثيران",     emoji: "🐄", href: "cows.html" },
+  { name: "Sheep",        nameAr: "أغنام",            emoji: "🐑", href: "sheep.html" },
+  { name: "Goats",        nameAr: "ماعز",             emoji: "🐐", href: "goats.html" },
+  { name: "Poultry",      nameAr: "دواجن",            emoji: "🐔", href: "poultry.html" },
+  { name: "Agricultural Medicines", nameAr: "أدوية زراعية", emoji: "💊", href: "medicines.html" },
+  { name: "Animal Feed",  nameAr: "علف الحيوانات",   emoji: "🌾", href: "feed.html" },
+  { name: "Farm Equipment", nameAr: "معدات زراعية",  emoji: "🚜", href: "equipment.html" },
+  { name: "Seeds & Fertilizers", nameAr: "بذور وأسمدة", emoji: "🌱", href: "fertilizers.html" },
+  { name: "Fresh Herbs Bundle", nameAr: "باقة أعشاب طازجة", emoji: "🌿", href: "products.html" },
+  { name: "Sweet Corn",   nameAr: "ذرة حلوة",        emoji: "🌽", href: "products.html" },
+  { name: "Organic Tomatoes", nameAr: "طماطم عضوية", emoji: "🍅", href: "products.html" },
+  { name: "Baby Carrots", nameAr: "جزر صغير",        emoji: "🥕", href: "products.html" },
+];
 
   const navSearch = document.getElementById("navSearch");
   const searchResults = document.getElementById("searchResults");
 
   if (navSearch && searchResults) {
-    navSearch.addEventListener("input", function () {
-      const q = this.value.trim().toLowerCase();
-      if (!q) { searchResults.classList.remove("open"); return; }
-      const matches = searchData.filter(item => item.name.toLowerCase().includes(q)).slice(0, 6);
-      if (matches.length === 0) {
-        searchResults.innerHTML = `<div class="search-no-results">No results for "${this.value}"</div>`;
-      } else {
-        searchResults.innerHTML = matches.map(m =>
-          `<a class="search-result-item" href="${m.href}">
-            <span class="search-result-emoji">${m.emoji}</span>${m.name}
-          </a>`
-        ).join("");
-      }
-      searchResults.classList.add("open");
-    });
+navSearch.addEventListener("input", function () {
+  const q = this.value.trim().toLowerCase();
+  if (!q) { searchResults.classList.remove("open"); return; }
+  const matches = searchData.filter(item =>
+    item.name.toLowerCase().includes(q) || (item.nameAr && item.nameAr.includes(q))
+  ).slice(0, 6);
+  if (matches.length === 0) {
+    searchResults.innerHTML = `<div class="search-no-results">No results for "${this.value}"</div>`;
+  } else {
+    searchResults.innerHTML = matches.map(m =>
+      `<a class="search-result-item" href="products.html?search=${encodeURIComponent(m.name)}&cat=${encodeURIComponent(m.cat || '')}">
+        <span class="search-result-emoji">${m.emoji}</span>${m.name}
+      </a>`
+    ).join("");
+  }
+  searchResults.classList.add("open");
+});
 
-    navSearch.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { searchResults.classList.remove("open"); this.blur(); }
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!navSearch.closest(".search-box").contains(e.target)) {
-        searchResults.classList.remove("open");
-      }
-    });
+navSearch.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && this.value.trim()) {
+    window.location.href = "products.html?search=" + encodeURIComponent(this.value.trim());
+  }
+  if (e.key === "Escape") { searchResults.classList.remove("open"); this.blur(); }
+});
 
     // clear button also closes results
     const clearBtn = navSearch.closest(".search-box").querySelector("button[type='reset']");
