@@ -86,6 +86,14 @@
 
     <!-- ── LOGIN FORM ── -->
     <div class="form-panel visible" id="panelLogin">
+      <div class="field" id="savedPhoneField" style="display:none;">
+        <label>Phone Number</label>
+        <div class="input-wrap">
+          <span class="input-icon">📞</span>
+          <input type="tel" id="savedPhoneDisplay" placeholder="" readonly style="background:var(--cream-dark);cursor:default;color:var(--text-muted);"/>
+        </div>
+      </div>
+
       <div class="field">
         <label for="loginEmail">Email</label>
         <div class="input-wrap">
@@ -130,6 +138,15 @@
           <input type="text" id="regName" placeholder="Your full name" autocomplete="name"/>
         </div>
         <div class="field-error" id="regNameErr"></div>
+      </div>
+
+      <div class="field">
+        <label for="regPhone">Phone Number</label>
+        <div class="input-wrap">
+          <span class="input-icon">📞</span>
+          <input type="tel" id="regPhone" placeholder="+216 55 123 456" autocomplete="tel"/>
+        </div>
+        <div class="field-error" id="regPhoneErr"></div>
       </div>
 
       <div class="field">

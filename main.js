@@ -94,15 +94,26 @@ navSearch.addEventListener("input", function () {
   const matches = searchData.filter(item =>
     item.name.toLowerCase().includes(q) || (item.nameAr && item.nameAr.includes(q))
   ).slice(0, 6);
-  if (matches.length === 0) {
-    searchResults.innerHTML = `<div class="search-no-results">No results for "${this.value}"</div>`;
-  } else {
-    searchResults.innerHTML = matches.map(m =>
-      `<a class="search-result-item" href="products.html?search=${encodeURIComponent(m.name)}&cat=${encodeURIComponent(m.cat || '')}">
-        <span class="search-result-emoji">${m.emoji}</span>${m.name}
-      </a>`
-    ).join("");
-  }
+searchResults.innerHTML = '';
+      if (matches.length === 0) {
+        const noRes = document.createElement('div');
+        noRes.className = 'search-no-results';
+        noRes.textContent = 'No results for "' + this.value + '"';
+        searchResults.appendChild(noRes);
+      } else {
+        matches.forEach(m => {
+          const a = document.createElement('a');
+          a.className = 'search-result-item';
+          a.href = 'products.html?search=' + encodeURIComponent(m.name);
+          const emoji = document.createElement('span');
+          emoji.className = 'search-result-emoji';
+          emoji.textContent = m.emoji;
+          const name = document.createTextNode(m.name);
+          a.appendChild(emoji);
+          a.appendChild(name);
+          searchResults.appendChild(a);
+        });
+      }
   searchResults.classList.add("open");
 });
  

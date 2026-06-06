@@ -1,6 +1,12 @@
 
+/* ── SECURITY: SHA-256 hash helper (runs in browser, no library needed) ── */
+async function hashPassword(pw) {
+  const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
 document.addEventListener("DOMContentLoaded", function () {
- 
+
   //HERO LEAVES (fallback decoration)
   const video = document.querySelector(".hero-video");
   const leavesContainer = document.getElementById("heroLeaves");
@@ -85,15 +91,26 @@ navSearch.addEventListener("input", function () {
   const matches = searchData.filter(item =>
     item.name.toLowerCase().includes(q) || (item.nameAr && item.nameAr.includes(q))
   ).slice(0, 6);
-  if (matches.length === 0) {
-    searchResults.innerHTML = `<div class="search-no-results">No results for "${this.value}"</div>`;
-  } else {
-    searchResults.innerHTML = matches.map(m =>
-      `<a class="search-result-item" href="products.html?search=${encodeURIComponent(m.name)}&cat=${encodeURIComponent(m.cat || '')}">
-        <span class="search-result-emoji">${m.emoji}</span>${m.name}
-      </a>`
-    ).join("");
-  }
+searchResults.innerHTML = '';
+      if (matches.length === 0) {
+        const noRes = document.createElement('div');
+        noRes.className = 'search-no-results';
+        noRes.textContent = 'No results for "' + this.value + '"';
+        searchResults.appendChild(noRes);
+      } else {
+        matches.forEach(m => {
+          const a = document.createElement('a');
+          a.className = 'search-result-item';
+          a.href = 'products.html?search=' + encodeURIComponent(m.name);
+          const emoji = document.createElement('span');
+          emoji.className = 'search-result-emoji';
+          emoji.textContent = m.emoji;
+          const name = document.createTextNode(m.name);
+          a.appendChild(emoji);
+          a.appendChild(name);
+          searchResults.appendChild(a);
+        });
+      }
   searchResults.classList.add("open");
 });
  
@@ -149,7 +166,45 @@ navSearch.addEventListener("keydown", function (e) {
  
   spawnLeaves();
 
+  // ── INIT (merged from second DOMContentLoaded) ──
+  const urlParams  = new URLSearchParams(window.location.search);
+  const redirectTo = urlParams.get('redirect');
+  if (redirectTo === 'add-product.html') {
+    showAlert('🔒 Please log in to add a product.', 'error');
+  }
+
+  const savedLang = localStorage.getItem('siteLanguage') || 'en';
+  const langSel   = document.getElementById('languageSelect');
+  if (langSel) langSel.value = savedLang;
+  applyLang(savedLang);
+
+  const savedEmail = localStorage.getItem('rememberEmail');
+  if (savedEmail) {
+    document.getElementById('loginEmail').value   = savedEmail;
+    document.getElementById('rememberMe').checked = true;
+
+    // Show saved phone if the account has one
+    const accounts = JSON.parse(localStorage.getItem('kooriAccounts') || '[]');
+    const acct = accounts.find(a => a.email === savedEmail);
+    if (acct && acct.phone) {
+      document.getElementById('savedPhoneDisplay').value = acct.phone;
+      document.getElementById('savedPhoneField').style.display = 'block';
+    }
+  }
+
+  if (localStorage.getItem('loggedIn') === 'true') {
+    const redirect = urlParams.get('redirect') || 'products.html';
+    window.location.href = redirect;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('panelLogin').classList.contains('visible')) doLogin();
+    else doRegister();
+  });
+
 });
+
 /* 
    LANGUAGE
  */
@@ -161,6 +216,7 @@ const LOGIN_TRANSLATIONS = {
     join:        'Join koori',       join_sub:    'Create your free account today',
     tab_login:   'Login',            tab_reg:     'Register',
     lbl_email:   'Email',            lbl_pw:      'Password',       lbl_name:    'Full Name',
+    lbl_phone:   'Phone Number',     ph_phone:    '+213 555 123 456',
     lbl_confirm: 'Confirm Password', ph_email:    'you@example.com',
     ph_pw:       'Your password',    ph_name:     'Your full name', ph_confirm:  'Repeat your password',
     ph_new_pw:   'Choose a password',
@@ -176,6 +232,7 @@ const LOGIN_TRANSLATIONS = {
     join:        'Rejoindre koori',    join_sub:    'Créez votre compte gratuit',
     tab_login:   'Connexion',          tab_reg:     'Inscription',
     lbl_email:   'Email',              lbl_pw:      'Mot de passe',   lbl_name:    'Nom complet',
+    lbl_phone:   'Numéro de téléphone', ph_phone:   '+213 555 123 456',
     lbl_confirm: 'Confirmer le mot de passe',        ph_email:    'vous@exemple.com',
     ph_pw:       'Votre mot de passe', ph_name:     'Votre nom',     ph_confirm:  'Répétez le mot de passe',
     ph_new_pw:   'Choisir un mot de passe',
@@ -191,6 +248,7 @@ const LOGIN_TRANSLATIONS = {
     join:        'انضم إلى koori',   join_sub:    'أنشئ حسابك المجاني اليوم',
     tab_login:   'تسجيل الدخول',     tab_reg:     'إنشاء حساب',
     lbl_email:   'البريد الإلكتروني', lbl_pw:     'كلمة المرور',    lbl_name:    'الاسم الكامل',
+    lbl_phone:   'رقم الهاتف',        ph_phone:   '+213 555 123 456',
     lbl_confirm: 'تأكيد كلمة المرور', ph_email:   'أنت@مثال.com',
     ph_pw:       'كلمة مرورك',       ph_name:     'اسمك الكامل',   ph_confirm:  'أعد كلمة المرور',
     ph_new_pw:   'اختر كلمة مرور',
@@ -206,6 +264,7 @@ const LOGIN_TRANSLATIONS = {
     join:        'Unisciti a koori',   join_sub:    'Crea il tuo account gratuito',
     tab_login:   'Accedi',             tab_reg:     'Registrati',
     lbl_email:   'Email',              lbl_pw:      'Password',      lbl_name:    'Nome completo',
+    lbl_phone:   'Numero di telefono', ph_phone:    '+213 555 123 456',
     lbl_confirm: 'Conferma password',  ph_email:    'tu@esempio.com',
     ph_pw:       'La tua password',    ph_name:     'Il tuo nome',   ph_confirm:  'Ripeti la password',
     ph_new_pw:   'Scegli una password',
@@ -260,10 +319,12 @@ function applyLang(lang) {
 
   // register form labels & placeholders
   setLabelText('regName',     t.lbl_name);
+  setLabelText('regPhone',    t.lbl_phone);
   setLabelText('regEmail',    t.lbl_email);
   setLabelText('regPassword', t.lbl_pw);
   setLabelText('regConfirm',  t.lbl_confirm);
   document.getElementById('regName').placeholder     = t.ph_name;
+  document.getElementById('regPhone').placeholder    = t.ph_phone;
   document.getElementById('regEmail').placeholder    = t.ph_email;
   document.getElementById('regPassword').placeholder = t.ph_new_pw;
   document.getElementById('regConfirm').placeholder  = t.ph_confirm;
@@ -398,35 +459,39 @@ function doLogin() {
   }
   if (!valid) return;
 
-  // Simulate login check against localStorage accounts
-  const accounts = JSON.parse(localStorage.getItem('kooriAccounts') || '[]');
-  const match    = accounts.find(a => a.email === email && a.password === pw);
-
   const btn = document.getElementById('loginBtn');
   btn.textContent = '⏳ Logging in…';
   btn.classList.add('loading');
 
-  setTimeout(() => {
-    btn.textContent = '🌿 Login';
-    btn.classList.remove('loading');
+  // FIXED: hash password before comparing — no plain-text comparison
+  hashPassword(pw).then(hashedPw => {
+    const accounts = JSON.parse(localStorage.getItem('kooriAccounts') || '[]');
+    // FIXED: removed || accounts.length === 0 demo bypass
+    const match = accounts.find(a => a.email === email && a.passwordHash === hashedPw);
 
-    if (match || accounts.length === 0) {
-      // Accept if account found, OR if no accounts yet (demo mode)
-      localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('kooriUser', JSON.stringify(match || { email, name: email.split('@')[0] }));
-      if (document.getElementById('rememberMe').checked) {
-        localStorage.setItem('rememberEmail', email);
+    setTimeout(() => {
+      btn.textContent = '🌿 Login';
+      btn.classList.remove('loading');
+
+      if (match) {
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('kooriUser', JSON.stringify({ email: match.email, name: match.name }));
+        if (document.getElementById('rememberMe').checked) {
+          localStorage.setItem('rememberEmail', email);
+        } else {
+          localStorage.removeItem('rememberEmail');
+        }
+        showAlert('✅ Login successful! Redirecting…', 'success');
+        setTimeout(() => {
+          const redirect = new URLSearchParams(window.location.search).get('redirect') || 'products.html';
+          window.location.href = redirect;
+        }, 900);
+      } else {
+        showAlert('❌ Incorrect email or password. Please try again.', 'error');
+        markError('loginEmail'); markError('loginPassword');
       }
-      showAlert('✅ Login successful! Redirecting…', 'success');
-      setTimeout(() => {
-        const redirect = new URLSearchParams(window.location.search).get('redirect') || 'products.html';
-        window.location.href = redirect;
-      }, 900);
-    } else {
-      showAlert('❌ Incorrect email or password. Please try again.', 'error');
-      markError('loginEmail'); markError('loginPassword');
-    }
-  }, 800);
+    }, 600);
+  });
 }
 
 /* 
@@ -434,10 +499,11 @@ function doLogin() {
  */
 function doRegister() {
   clearAlert();
-  clearErrs('regNameErr','regEmailErr','regPasswordErr','regConfirmErr');
-  ['regName','regEmail','regPassword','regConfirm'].forEach(clearError);
+  clearErrs('regNameErr','regPhoneErr','regEmailErr','regPasswordErr','regConfirmErr');
+  ['regName','regPhone','regEmail','regPassword','regConfirm'].forEach(clearError);
 
   const name    = document.getElementById('regName').value.trim();
+  const phone   = document.getElementById('regPhone').value.trim();
   const email   = document.getElementById('regEmail').value.trim();
   const pw      = document.getElementById('regPassword').value;
   const confirm = document.getElementById('regConfirm').value;
@@ -446,6 +512,10 @@ function doRegister() {
   if (!name) {
     setErr('regNameErr', 'Please enter your full name.');
     markError('regName'); valid = false;
+  }
+  if (!phone || !/^\+?[\d\s\-().]{7,20}$/.test(phone)) {
+    setErr('regPhoneErr', 'Please enter a valid phone number.');
+    markError('regPhone'); valid = false;
   }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     setErr('regEmailErr', 'Please enter a valid email address.');
@@ -487,21 +557,24 @@ function doRegister() {
   btn.textContent = '⏳ Creating account…';
   btn.classList.add('loading');
 
-  setTimeout(() => {
-    btn.textContent = '🌱 Create Account';
-    btn.classList.remove('loading');
-
-    accounts.push({ name, email, password: pw });
-    localStorage.setItem('kooriAccounts', JSON.stringify(accounts));
-    localStorage.setItem('loggedIn', 'true');
-    localStorage.setItem('kooriUser', JSON.stringify({ name, email }));
-
-    showAlert('🎉 Account created! Redirecting…', 'success');
+  // FIXED: hash password before storing — never save plain text
+  hashPassword(pw).then(hashedPw => {
     setTimeout(() => {
-      const redirect = new URLSearchParams(window.location.search).get('redirect') || 'products.html';
-      window.location.href = redirect;
-    }, 900);
-  }, 800);
+      btn.textContent = '🌱 Create Account';
+      btn.classList.remove('loading');
+
+      accounts.push({ name, phone, email, passwordHash: hashedPw });
+      localStorage.setItem('kooriAccounts', JSON.stringify(accounts));
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('kooriUser', JSON.stringify({ name, phone, email }));
+
+      showAlert('🎉 Account created! Redirecting…', 'success');
+      setTimeout(() => {
+        const redirect = new URLSearchParams(window.location.search).get('redirect') || 'products.html';
+        window.location.href = redirect;
+      }, 900);
+    }, 600);
+  });
 }
 
 /* 
@@ -527,37 +600,4 @@ function socialLogin(provider) {
 /* 
    INIT
  */
-document.addEventListener('DOMContentLoaded', () => {
-  // Show redirect hint if coming from Add Item
-  const urlParams = new URLSearchParams(window.location.search);
-  const redirectTo = urlParams.get('redirect');
-  if (redirectTo === 'add-product.html') {
-    showAlert('🔒 Please log in to add a product.', 'error');
-  }
-
-  // Apply saved language
-  const savedLang = localStorage.getItem('siteLanguage') || 'en';
-  const langSel   = document.getElementById('languageSelect');
-  if (langSel) langSel.value = savedLang;
-  applyLang(savedLang);
-
-  // Pre-fill remembered email
-  const saved = localStorage.getItem('rememberEmail');
-  if (saved) {
-    document.getElementById('loginEmail').value = saved;
-    document.getElementById('rememberMe').checked = true;
-  }
-
-  // If already logged in, redirect away
-  if (localStorage.getItem('loggedIn') === 'true') {
-    const redirect = new URLSearchParams(window.location.search).get('redirect') || 'products.html';
-    window.location.href = redirect;
-  }
-
-  // Enter key submits
-  document.addEventListener('keydown', e => {
-    if (e.key !== 'Enter') return;
-    if (document.getElementById('panelLogin').classList.contains('visible')) doLogin();
-    else doRegister();
-  });
-}); 
+// (init code merged into the main DOMContentLoaded above) 
