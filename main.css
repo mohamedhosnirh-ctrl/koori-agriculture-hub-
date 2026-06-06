@@ -62,8 +62,8 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 0 2.5rem;
+  gap: 0.75rem;
+  padding: 0 2rem;
   height: var(--nav-h);
   background: var(--brown);
   position: sticky;
@@ -105,8 +105,8 @@ body {
 
 @keyframes idleFloat {
   0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
-  30%      { transform: translateY(-7px) rotate(-4deg) scale(1.08); }
-  60%      { transform: translateY(-6px) rotate(3deg) scale(1.04); }
+  30%      { transform: translateY(-4px) rotate(-7deg) scale(1.11); }
+  60%      { transform: translateY(-3px) rotate(6deg) scale(1.09); }
 }
 
 .koori-logo:hover .koori-letter1 { animation: explode1 .6s cubic-bezier(.16,1,.3,1) forwards; }
@@ -115,76 +115,49 @@ body {
 .koori-logo:hover .koori-letter4 { animation: explode4 .6s cubic-bezier(.16,1,.3,1) .15s forwards; }
 .koori-logo:hover .koori-letter5 { animation: explode5 .6s cubic-bezier(.16,1,.3,1) .20s forwards; }
 
-@keyframes explode1 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(-28px,-30px) rotate(-20deg) scale(1.4);color:var(--gold-light)} 100%{transform:translate(-12px,-18px) rotate(-10deg) scale(1.15);color:#fff} }
-@keyframes explode2 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(-10px,-36px) rotate(10deg) scale(1.5);color:var(--gold-light)} 100%{transform:translate(-4px,-20px) rotate(5deg) scale(1.2);color:#fff} }
-@keyframes explode3 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(0,-40px) rotate(-5deg) scale(1.6);color:var(--gold-light)} 100%{transform:translate(0,-22px) rotate(-2deg) scale(1.25);color:#fff} }
-@keyframes explode4 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(10px,-36px) rotate(12deg) scale(1.5);color:var(--gold-light)} 100%{transform:translate(4px,-20px) rotate(6deg) scale(1.2);color:#fff} }
-@keyframes explode5 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(28px,-30px) rotate(22deg) scale(1.4);color:var(--gold-light)} 100%{transform:translate(12px,-18px) rotate(12deg) scale(1.15);color:#fff} }
+@keyframes explode1 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(-0,-0) rotate(90deg) scale(1.7);color:var(--gold-light)} 100%{transform:translate(-0,-0) rotate(-10deg) scale(1.15);color:#fff} }
+@keyframes explode2 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(-0,-0) rotate(-70deg) scale(1.8);color:var(--gold-light)} 100%{transform:translate(-0,-2px) rotate(5deg) scale(1.2);color:#fff} }
+@keyframes explode3 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(0,-0) rotate(-180deg) scale(1.9);color:var(--gold-light)} 100%{transform:translate(0,-4px) rotate(-2deg) scale(1.25);color:#fff} }
+@keyframes explode4 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(0,-0) rotate(70deg) scale(1.8);color:var(--gold-light)} 100%{transform:translate(0,-4px) rotate(6deg) scale(1.2);color:#fff} }
+@keyframes explode5 { 0%{transform:translate(0,0) rotate(0) scale(1);color:var(--gold)} 50%{transform:translate(0,0) rotate(-90deg) scale(1.7);color:var(--gold-light)} 100%{transform:translate(0,-0) rotate(12deg) scale(1.15);color:#fff} }
 /* search bar */
 .search-box {
-  font-size: 16px;
-  border: solid 0.3em #F5C842;
-  display: inline-block;
+  margin-left: 4%;
   position: relative;
-  border-radius: 2.5em;
-  margin-left: 50px;
   flex-shrink: 0;
+}
+.search-box::before {
+  content: '🏡';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1;
 }
 .search-box input[type="text"] {
   font-family: 'Patrick Hand', cursive;
   font-size: 15px;
-  font-weight: bold;
   color: #2c1a0e;
-  width: 2.5em;
-  height: 2.5em;
-  padding: 0.3em 2.1em 0.3em 0.4em;
-  border: none;
-  box-sizing: border-box;
-  border-radius: 2.5em;
+  width: 120px;
+  height: 36px;
+  padding: 5px 10px 5px 32px;
+  border: 2px solid #F5C842;
+  border-radius: 8px;
   background: #fdf6ec;
-  transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 150ms;
+  outline: none;
+  transition: width 0.3s ease;
   cursor: pointer;
 }
-.search-box input[type="text"]:focus { outline: none; cursor: text; }
-.search-box input[type="text"]:focus,
+.search-box input[type="text"]:focus {
+  width: 400px;
+  cursor: text;
+}
 .search-box input[type="text"]:not(:placeholder-shown) {
-  width: 16em;
-  transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  width: 400px;
 }
-.search-box input[type="text"]:focus + button[type="reset"],
-.search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"] {
-  transform: rotate(-45deg) translateY(0);
-  transition: transform 150ms ease-out 800ms;
-}
-.search-box input[type="text"]:focus + button[type="reset"]:after,
-.search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"]:after {
-  opacity: 1;
-  transition: top 150ms ease-out 950ms, right 150ms ease-out 950ms,
-              opacity 150ms ease 950ms;
-}
-.search-box button[type="reset"] {
-  background-color: transparent;
-  width: 1.4em; height: 1.4em;
-  border: 0; padding: 0; outline: 0; cursor: pointer;
-  display: flex; justify-content: center; align-items: center;
-  position: absolute;
-  top: calc(2.5em / 2 - 1.4em / 2);
-  right: calc(2.5em / 2 - 1.4em / 2);
-  transform: rotate(-45deg) translateY(calc(2.5em - 0.3em));
-  transition: transform 150ms ease-out 150ms;
-}
-.search-box button[type="reset"]:before,
-.search-box button[type="reset"]:after {
-  content: "";
-  background-color: #F5C842;
-  width: 0.3em; height: 1.4em;
-  position: absolute;
-}
-.search-box button[type="reset"]:after {
-  transform: rotate(90deg);
-  opacity: 0;
-  transition: transform 150ms ease-out, opacity 150ms ease-out;
-}
+.search-box button[type="reset"] { display: none; }
 /* nav links */
 .nav-links { display: flex; list-style: none; gap: 0.25rem; margin-left: auto; }
 .nav-links a {

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>koori — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+<!--  NAVBAR  -->
+<header role="banner">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="koori-bg">
+            <span class="koori-logo">
+                <a href="main.html" class="link-logo" aria-label="koori home">
+                <span class="koori-letter1" aria-hidden="true">k</span>
+                <span class="koori-letter2" aria-hidden="true">o</span>
+                <span class="koori-letter3" aria-hidden="true">o</span>
+                <span class="koori-letter4" aria-hidden="true">r</span>
+                <span class="koori-letter5" aria-hidden="true">i</span>
+                </a>
+            </span>
+
+        </div>
+        <div class="search-box">
+        <input type="text" placeholder="Search products…" id="navSearch" aria-label="Search products" autocomplete="off"/>
+        <button type="reset" aria-label="Clear search"></button>
+        <div class="search-results" id="searchResults" role="listbox" aria-label="Search suggestions"></div>
+        </div>
+        <ul class="nav-links" role="list">
+            <li><a href="main.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="categories.html">news</a></li>
+            <li><a href="#" id="addItemLink">Add Item</a></li>
+            <li><a href="cart.html">Cart <span id="cartCount" aria-live="polite" aria-label="items in cart"></span></a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-icons">
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+        <div class="language-switcher">
+            <select id="languageSelect" aria-label="Select language">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+                <option value="it">IT</option>
+            </select>
+        </div>
+    </nav>
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="main.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">news</a>
+        <a href="#" id="addItemLinkMobile">Add Item</a>
+        <a href="cart.html">Cart</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+
+<!--  MAIN  -->
+<main>
+  <div class="login-card">
+
+    <!-- icon + heading -->
+    <div class="card-icon">🌾</div>
+    <h1 class="card-title">Welcome back</h1>
+    <p class="card-subtitle">Log in to your koori account</p>
+
+    <!-- tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tabLogin"    onclick="switchTab('login')">Login</button>
+      <button class="tab-btn"        id="tabRegister" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- alert banner -->
+    <div class="alert" id="alertBox"></div>
+
+    <!-- ── LOGIN FORM ── -->
+    <div class="form-panel visible" id="panelLogin">
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email"/>
+        </div>
+        <div class="field-error" id="loginEmailErr"></div>
+      </div>
+
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password"/>
+          <button class="toggle-pw" type="button" onclick="togglePw('loginPassword',this)" title="Show / hide">👁</button>
+        </div>
+        <div class="field-error" id="loginPasswordErr"></div>
+      </div>
+
+      <div class="form-row">
+        <label class="remember-label">
+          <input type="checkbox" id="rememberMe"/> Remember me
+        </label>
+        <a href="#" class="forgot-link" onclick="forgotPassword(event)">Forgot password?</a>
+      </div>
+
+      <button class="submit-btn" id="loginBtn" onclick="doLogin()">🌿 Login</button>
+
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button class="social-btn" onclick="socialLogin('Google')">🔵 Google</button>
+        <button class="social-btn" onclick="socialLogin('Facebook')">🔷 Facebook</button>
+      </div>
+    </div>
+
+    <!-- ── REGISTER FORM ── -->
+    <div class="form-panel" id="panelRegister">
+      <div class="field">
+        <label for="regName">Full Name</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input type="text" id="regName" placeholder="Your full name" autocomplete="name"/>
+        </div>
+        <div class="field-error" id="regNameErr"></div>
+      </div>
+
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">📧</span>
+          <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email"/>
+        </div>
+        <div class="field-error" id="regEmailErr"></div>
+      </div>
+
+      <div class="field">
+        <label for="regPassword">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input type="password" id="regPassword" placeholder="Choose a password" autocomplete="new-password"
+                 oninput="checkStrength(this.value)"/>
+          <button class="toggle-pw" type="button" onclick="togglePw('regPassword',this)" title="Show / hide">👁</button>
+        </div>
+        <div class="strength-bar" id="strengthBar">
+          <div class="strength-seg" id="seg1"></div>
+          <div class="strength-seg" id="seg2"></div>
+          <div class="strength-seg" id="seg3"></div>
+          <div class="strength-seg" id="seg4"></div>
+        </div>
+        <div class="strength-label" id="strengthLabel"></div>
+        <!-- live password tips -->
+        <div class="pw-tips" id="pwTips">
+          <div class="pw-tips-title">🔐 A strong password needs:</div>
+          <ul class="pw-rules">
+            <li class="pw-rule" id="rule-length">  <span class="rule-icon">✗</span> At least 8 characters</li>
+            <li class="pw-rule" id="rule-upper">   <span class="rule-icon">✗</span> One uppercase letter (A–Z)</li>
+            <li class="pw-rule" id="rule-number">  <span class="rule-icon">✗</span> One number (0–9)</li>
+            <li class="pw-rule" id="rule-special"> <span class="rule-icon">✗</span> One special character (!@#$…)</li>
+          </ul>
+        </div>
+        <div class="field-error" id="regPasswordErr"></div>
+      </div>
+
+      <div class="field">
+        <label for="regConfirm">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="regConfirm" placeholder="Repeat your password" autocomplete="new-password"/>
+          <button class="toggle-pw" type="button" onclick="togglePw('regConfirm',this)" title="Show / hide">👁</button>
+        </div>
+        <div class="field-error" id="regConfirmErr"></div>
+      </div>
+
+      <button class="submit-btn" id="registerBtn" onclick="doRegister()" style="margin-top:.4rem;">
+        🌱 Create Account
+      </button>
+
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button class="social-btn" onclick="socialLogin('Google')">🔵 Google</button>
+        <button class="social-btn" onclick="socialLogin('Facebook')">🔷 Facebook</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!--  FOOTER  -->
+<footer class="site-footer">
+  © 2026 koori. All rights reserved.
+</footer>
+
+<script src="login.js"></script>
+</body>
+</html>
