@@ -1,158 +1,110 @@
-<div align="center">
+🌿 Koori
+Building the Digital Ecosystem for Agriculture
 
-# 🌿 koori
+Koori is a next-generation digital platform designed to modernize the agricultural sector by bringing commerce, information, and services into one unified ecosystem.
 
-### Modern Farm Marketplace
+Our objective is to simplify the way agricultural products are discovered, promoted, and exchanged while providing reliable information that supports farmers, traders, and the wider agricultural community.
 
-A clean, modular web platform for managing and browsing agricultural products — built with a scalable file-per-page architecture and PHP/MySQL backend integration planned.
+Rather than being a traditional e-commerce website, Koori is being developed as the digital infrastructure for the agricultural industry.
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
-![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+Vision
 
-</div>
+To become the leading digital ecosystem for agriculture by connecting people, products, and services through a modern and accessible platform.
 
----
+Mission
 
-## 📋 Table of Contents
+Koori aims to bridge the gap between producers and consumers by providing a trusted marketplace for agricultural and livestock products while delivering valuable agricultural information and future digital services.
 
-- [Overview](#-overview)
-- [Pages](#-pages)
-- [Project Structure](#-project-structure)
-- [Database Schema](#-database-schema)
-- [Getting Started](#-getting-started)
-- [Tech Stack](#-tech-stack)
-- [Roadmap](#-roadmap)
-- [License](#-license)
+Core Platform
+Agricultural Marketplace
 
----
+The marketplace is designed to facilitate the discovery and publication of:
 
-## 🌱 Overview
+Livestock
+Agricultural products
+Animal products
+Farming equipment
+Seeds and crops
+Dairy products
+Honey and related products
+Agricultural supplies
 
-**koori** is a modern, scalable web marketplace designed for agricultural products. Each page follows a clean separation of concerns — its own HTML, CSS, and JavaScript — with PHP and MySQL integration coming in future releases.
+Every listing is intended to provide a simple, organized, and efficient experience for both sellers and buyers.
 
----
+Agricultural News
 
-## 📄 Pages
+Koori includes a dedicated news section focused on agricultural affairs, allowing users to stay informed about:
 
-| Page | Description |
-|------|-------------|
-| 🏠 Home | Landing page and featured products |
-| 🛒 Products | Browse all available items |
-| 📂 Categories | Filter products by category |
-| ➕ Add Item | Submit a new product listing |
-| 🛍️ Cart | View and manage selected items |
-| 📬 Contact | Send a message or inquiry |
-| 🔐 Login | User authentication |
+National agricultural news
+Livestock updates
+Farming innovations
+Market trends
+Government announcements
+Seasonal developments
 
----
+The objective is to transform information into an accessible daily resource for the agricultural community.
 
-## 📁 Project Structure
+Target Audience
 
-```
-koori/
-├── index.html          # Entry point (landing page)
-├── main.css            # Global styles
-├── main.js             # App logic (search, cart, i18n, etc.)
-├── LICENSE
-├── README.md
-├── products.html       # (planned)
-├── categories.html     # (planned)
-├── add-item.html       # (planned)
-├── cart.html           # (planned)
-├── contact.html        # (planned)
-├── login.html          # (planned)
-└── assets/
-    ├── images/
-    └── icons/
-```
+Koori is primarily designed for:
 
-> The app uses a single-page entry (`index.html`) with shared `main.css` and `main.js`. Future pages will follow the file-per-page pattern with PHP backend.
+Farmers
+Livestock owners
+Agricultural traders
+Agricultural equipment suppliers
 
----
+The platform is also intended to serve:
 
-## 🗄️ Database Schema
+Delivery companies
+Independent couriers
+Veterinarians
+Agricultural professionals
+General consumers interested in agricultural products
+Technology
+Current
+HTML5
+CSS3
+JavaScript
+Planned
+PHP
+MySQL
 
-> MySQL integration is planned. The following tables will be used:
+The current development stage focuses on building a scalable and maintainable frontend architecture before backend integration.
 
-```sql
-users       (id, name, email, password, role)
-products    (id, name, price, category_id, image, description)
-categories  (id, name)
-cart        (id, user_id, product_id, quantity)
-messages    (id, name, email, message)
-images      (id, product_id, path)
-```
+Development Philosophy
 
----
+Koori is built around three fundamental principles:
 
-## 🚀 Getting Started
+Simplicity
+Scalability
+Reliability
 
-### Frontend Preview
+Every component is designed with long-term growth in mind, allowing the platform to evolve from a marketplace into a complete digital ecosystem for agriculture.
 
-```bash
-# Clone the repository
-git clone https://github.com/mohamedhosnirh-ctrl/koori-agriculture-hub-.git
+Long-Term Roadmap
 
-# Open in your browser
-open koori/index.html
-```
+Future versions of Koori will progressively introduce:
 
-### Deploy on GitHub Pages
+User authentication
+Farmer and seller profiles
+Advanced search and filtering
+Product management
+Delivery integration
+Veterinarian services
+Administrative dashboard
+Payment solutions
+Mobile applications
 
-This site is fully static and ready for [GitHub Pages](https://pages.github.com/):
+These features will be implemented incrementally while maintaining a clean and scalable architecture.
 
-1. Push the repository to GitHub
-2. Go to **Settings → Pages**
-3. Under **Branch**, select `main` and save
-4. Your site will be live at `https://<username>.github.io/koori-agriculture-hub-/`
+Statement
 
-### Full Stack (PHP + MySQL)
+Koori is more than a marketplace.
 
-1. Move the project folder into your XAMPP `htdocs/` directory
-2. Start **Apache** and **MySQL** from the XAMPP control panel
-3. Import `koori.sql` into phpMyAdmin *(available in a future release)*
-4. Visit `http://localhost/koori/index.html`
+It is a long-term initiative to digitally connect agriculture, livestock, information, and services within a single modern platform.
 
----
+Author
 
-## 🛠️ Tech Stack
+Rayen
 
-| Layer | Technology |
-|-------|------------|
-| Markup | HTML5 |
-| Styling | CSS3 |
-| Logic | JavaScript |
-| Backend | PHP *(planned)* |
-| Database | MySQL *(planned)* |
-| Temp Storage | LocalStorage |
-
----
-
-## 🗺️ Roadmap
-
-- [ ] PHP authentication system (login/register)
-- [ ] MySQL integration for all pages
-- [ ] Admin dashboard
-- [ ] Product image upload
-- [ ] Search and category filters
-- [ ] Real-time offers / notifications
-- [ ] REST API integration
-
----
-
-## 👤 Author
-
-**Rayen**  
-Feel free to open issues or submit pull requests!
-
----
-
-## 📄 License
-
-This project is licensed under the [GNU General Public License v3.0](LICENSE).
-
-You are free to use, modify, and distribute this software, but any derivative work **must also be released under the GPL**. See the [LICENSE](LICENSE) file for full details.
+Licensed under the GNU General Public License v3.0 (GPL-3.0).

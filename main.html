@@ -7,6 +7,11 @@
     <title>koori</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="buttons.css">
+  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="utilities.css">
 </head>
 <body>
 
@@ -131,27 +136,27 @@
         <p class="section-sub">Shop by Category</p>
     </div>
     <div class="categories-grid">
-        <a href="products.html?cat=vegetables" class="cat-card">
+        <a href="products.html?cat=vegetables" class="cat-card" data-tilt>
             <div class="cat-emoji">🥦</div>
             <span>Vegetables</span>
         </a>
-        <a href="products.html?cat=fruits" class="cat-card">
+        <a href="products.html?cat=fruits" class="cat-card" data-tilt>
             <div class="cat-emoji">🍎</div>
             <span>Fruits</span>
         </a>
-        <a href="products.html?cat=grains" class="cat-card">
+        <a href="products.html?cat=grains" class="cat-card" data-tilt>
             <div class="cat-emoji">🌾</div>
             <span>Grains</span>
         </a>
-        <a href="products.html?cat=dairy" class="cat-card">
+        <a href="products.html?cat=dairy" class="cat-card" data-tilt>
             <div class="cat-emoji">🥛</div>
             <span>Dairy</span>
         </a>
-        <a href="products.html?cat=herbs" class="cat-card">
+        <a href="products.html?cat=herbs" class="cat-card" data-tilt>
             <div class="cat-emoji">🌿</div>
             <span>Herbs</span>
         </a>
-        <a href="products.html?cat=honey" class="cat-card">
+        <a href="products.html?cat=honey" class="cat-card" data-tilt>
             <div class="cat-emoji">🍯</div>
             <span>Honey</span>
         </a>
@@ -176,7 +181,7 @@
 
     <div class="products-grid">
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 🐄
             </div>
@@ -186,7 +191,7 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 🐑
             </div>
@@ -196,7 +201,7 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 🐐
             </div>
@@ -206,7 +211,7 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 🐔
             </div>
@@ -216,7 +221,7 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 💊
             </div>
@@ -226,8 +231,8 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
-            <div class="product-img">
+
+<a href="products.html" class="product-card category-card" data-tilt>            <div class="product-img">
                 🌾
             </div>
             <div class="product-info">
@@ -236,7 +241,7 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
+        <a href="products.html" class="product-card category-card" data-tilt>
             <div class="product-img">
                 🚜
             </div>
@@ -246,10 +251,8 @@
             </div>
         </a>
 
-        <a href="products.html" class="product-card category-card">
-            <div class="product-img">
-                🌱
-            </div>
+        <a href="products.html" class="product-card category-card" data-tilt>
+            <div class="product-img">🌱</div>
             <div class="product-info">
                 <h3>Seeds & Fertilizers</h3>
                 <p>Everything for cultivation</p>
@@ -300,7 +303,7 @@
         <p class="section-sub">آراء عملائنا</p>
     </div>
     <div class="testimonials-grid">
-        <div class="testi-card">
+        <div class="testi-card" data-tilt data-tilt-strength="8">
             <div class="testi-stars">★★★★★</div>
             <p class="testi-text">"Amazing quality! The vegetables were so fresh, I could tell the difference immediately."</p>
             <div class="testi-author">
@@ -311,7 +314,7 @@
                 </div>
             </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-tilt data-tilt-strength="8">
             <div class="testi-stars">★★★★★</div>
             <p class="testi-text">"Fast delivery and great prices. koori is my go-to for all farm products now!"</p>
             <div class="testi-author">
@@ -322,7 +325,7 @@
                 </div>
             </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-tilt data-tilt-strength="8">
             <div class="testi-stars">★★★★☆</div>
             <p class="testi-text">"Love the variety of products. The herbs bundle is especially great for cooking!"</p>
             <div class="testi-author">
@@ -399,5 +402,6 @@
 <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
 <script src="main.js"></script>
+<script src="tilt.js"></script>
 </body>
 </html>

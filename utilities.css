@@ -1,0 +1,226 @@
+/* =========================================================
+   KOORI LOGIN / AUTH PAGE — utilities.css
+   Exact palette + style from main.css
+   White card · #f0e6d6 border · brown/gold
+   Fredoka One (headings) · Patrick Hand (inputs)
+   ========================================================= */
+
+/* ── PAGE LAYOUT ── */
+.login-page {
+  min-height: calc(100vh - var(--nav-h));
+  background: linear-gradient(135deg, #fdf6ec 0%, #f5ead8 50%, #e9d7be 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+/* ── CARD WRAPPER ── */
+.login-wrapper { width: 100%; max-width: 460px; }
+
+.login-card,
+.form-card {
+  background: var(--white);
+  border: 1.5px solid #f0e6d6;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(90,56,18,0.14);
+  padding: 2.75rem 2.5rem;
+  animation: loginFadeUp 0.6s ease both;
+}
+@keyframes loginFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ICON ── */
+.card-icon {
+  width: 68px; height: 68px;
+  margin: 0 auto 1.25rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--brown), var(--brown-dark));
+  color: var(--gold);
+  box-shadow: 0 8px 24px rgba(90,56,18,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+
+/* ── HEADING ── */
+.login-card h2,
+.form-card h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.9rem; color: var(--brown);
+  text-align: center; margin: 0 0 0.4rem;
+}
+.login-card .card-sub,
+.form-card .card-sub {
+  text-align: center; color: var(--text-muted);
+  font-size: 0.95rem; margin: 0 0 2rem;
+}
+
+/* ── TAB SWITCHER ── */
+.auth-tabs {
+  display: flex; background: var(--cream-dark);
+  border-radius: 99px; padding: 4px;
+  margin-bottom: 1.75rem; gap: 4px;
+}
+.auth-tab {
+  flex: 1; height: 38px; border: none; border-radius: 99px;
+  background: transparent; color: var(--text-muted);
+  font-family: 'Patrick Hand', cursive; font-size: 1rem;
+  font-weight: 700; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.auth-tab.active {
+  background: var(--brown); color: var(--gold);
+  box-shadow: 0 4px 14px rgba(90,56,18,0.15);
+}
+.auth-tab:not(.active):hover { color: var(--brown); }
+
+/* ── FORMS ── */
+.login-form,
+.register-form { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.9rem; font-weight: 700; color: var(--brown); }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  height: 46px; padding: 0 1rem;
+  border: 2px solid #f0e6d6; border-radius: var(--radius);
+  background: var(--cream); color: var(--text);
+  font-family: 'Patrick Hand', cursive; font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.form-group textarea {
+  height: auto; min-height: 110px;
+  padding: 0.75rem 1rem; resize: vertical;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-muted); opacity: 0.7; }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(245,200,66,0.18);
+}
+
+/* ── INLINE ROW ── */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── PASSWORD WRAPPER ── */
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 3rem; }
+.toggle-pw {
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; color: var(--text-muted);
+  padding: 0; transition: color 0.2s;
+}
+.toggle-pw:hover { color: var(--brown); }
+
+/* ── FORGOT LINK ── */
+.forgot-link {
+  display: block; text-align: right;
+  font-size: 0.88rem; color: var(--text-muted);
+  text-decoration: none; margin-top: -0.3rem;
+  transition: color 0.2s;
+}
+.forgot-link:hover { color: var(--brown); text-decoration: underline; }
+
+/* ── SUBMIT BUTTON ── */
+.submit-btn {
+  height: 48px; border: none; border-radius: 99px;
+  background: var(--brown); color: var(--gold);
+  font-family: 'Patrick Hand', cursive; font-size: 1.05rem;
+  font-weight: 700; cursor: pointer; width: 100%; margin-top: 0.4rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.submit-btn:hover {
+  background: var(--brown-dark);
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(90,56,18,0.18);
+}
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+.submit-btn.loading { position: relative; pointer-events: none; opacity: 0.75; }
+.submit-btn.loading::after {
+  content: ''; width: 16px; height: 16px;
+  border: 2px solid var(--gold); border-right-color: transparent;
+  border-radius: 50%; animation: loginSpin 0.7s linear infinite;
+  display: inline-block; margin-left: 8px; vertical-align: middle;
+}
+@keyframes loginSpin { to { transform: rotate(360deg); } }
+
+/* ── DIVIDER ── */
+.auth-divider {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin: 1.25rem 0; color: var(--text-muted); font-size: 0.88rem;
+}
+.auth-divider::before,
+.auth-divider::after { content: ''; flex: 1; height: 1px; background: #f0e6d6; }
+
+/* ── SOCIAL LOGIN ── */
+.social-logins { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.social-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.5rem; height: 44px;
+  border: 2px solid #f0e6d6; border-radius: var(--radius);
+  background: var(--white); color: var(--text);
+  font-family: 'Patrick Hand', cursive; font-size: 0.95rem;
+  font-weight: 700; cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.social-btn:hover {
+  border-color: var(--gold); background: #fffbf0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(123,79,30,0.10);
+}
+
+/* ── SWITCH LINK ── */
+.auth-switch {
+  text-align: center; margin-top: 1.5rem;
+  color: var(--text-muted); font-size: 0.92rem;
+}
+.auth-switch a {
+  color: var(--brown); font-weight: 700;
+  text-decoration: none; transition: color 0.2s;
+}
+.auth-switch a:hover { color: var(--brown-dark); text-decoration: underline; }
+
+/* ── FORM FEEDBACK ── */
+.field-error { font-size: 0.82rem; color: #c0392b; margin-top: 2px; }
+.form-msg {
+  text-align: center; font-size: 0.92rem;
+  padding: 0.6rem 1rem; border-radius: 10px; margin-top: 0.5rem;
+}
+.form-msg.success {
+  background: rgba(47,143,70,0.10); color: #2F8F46;
+  border: 1px solid rgba(47,143,70,0.2);
+}
+.form-msg.error {
+  background: rgba(192,57,43,0.08); color: #c0392b;
+  border: 1px solid rgba(192,57,43,0.2);
+}
+
+/* ── CHECKBOX ── */
+.form-check {
+  display: flex; align-items: flex-start;
+  gap: 0.6rem; font-size: 0.9rem; color: var(--text-muted);
+}
+.form-check input[type="checkbox"] {
+  width: 18px; height: 18px; min-height: unset;
+  border: 2px solid #f0e6d6; border-radius: 5px;
+  accent-color: var(--brown); cursor: pointer;
+  margin-top: 2px; flex-shrink: 0;
+}
+.form-check a { color: var(--brown); font-weight: 700; text-decoration: none; }
+.form-check a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 520px) {
+  .login-card, .form-card { padding: 2rem 1.5rem; border-radius: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .social-logins { grid-template-columns: 1fr; }
+}
