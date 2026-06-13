@@ -151,6 +151,18 @@ navSearch.addEventListener("keydown", function (e) {
     });
   }
  
+  //LOGIN LINK — redirect already-logged-in users to products instead of login page
+  const loginBtn = document.querySelector(".login-btn");
+  if (loginBtn && localStorage.getItem("loggedIn") === "true") {
+    loginBtn.href = "products.html";
+    loginBtn.textContent = "Dashboard";
+  }
+  const mobileLoginLink = document.querySelector('#mobileNav a[href="login.html"]');
+  if (mobileLoginLink && localStorage.getItem("loggedIn") === "true") {
+    mobileLoginLink.href = "products.html";
+    mobileLoginLink.textContent = "Dashboard";
+  }
+ 
   //LANGUAGE
   const langSelect = document.getElementById("languageSelect");
   if (langSelect) {
@@ -190,11 +202,6 @@ navSearch.addEventListener("keydown", function (e) {
       document.getElementById('savedPhoneDisplay').value = acct.phone;
       document.getElementById('savedPhoneField').style.display = 'block';
     }
-  }
-
-  if (localStorage.getItem('loggedIn') === 'true') {
-    const redirect = urlParams.get('redirect') || 'products.html';
-    window.location.href = redirect;
   }
 
   document.addEventListener('keydown', e => {

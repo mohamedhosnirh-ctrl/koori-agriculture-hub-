@@ -12,6 +12,14 @@
   <link rel="stylesheet" href="buttons.css">
   <link rel="stylesheet" href="cards.css">
   <link rel="stylesheet" href="utilities.css">
+  <script>
+    (function() {
+      if (localStorage.getItem('loggedIn') === 'true') {
+        var params = new URLSearchParams(location.search);
+        window.location.replace(params.get('redirect') || 'products.html');
+      }
+    })();
+  </script>
 </head>
 <body>
 
