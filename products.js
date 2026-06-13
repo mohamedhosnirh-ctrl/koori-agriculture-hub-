@@ -352,6 +352,18 @@ function applyLang(lang) {
 
 /* ADD ITEM LINK GUARD */
 function initAddItemLink() {
+  //LOGIN LINK — redirect already-logged-in users to products instead of login page
+  const loginBtn = document.querySelector('.login-btn');
+  if (loginBtn && localStorage.getItem('loggedIn') === 'true') {
+    loginBtn.href = 'products.html';
+    loginBtn.textContent = 'Dashboard';
+  }
+  const mobileLoginLink = document.querySelector('#mobileNav a[href="login.html"]');
+  if (mobileLoginLink && localStorage.getItem('loggedIn') === 'true') {
+    mobileLoginLink.href = 'products.html';
+    mobileLoginLink.textContent = 'Dashboard';
+  }
+
   const addItemLink = document.getElementById('addItemLink');
   if (!addItemLink) return;
   const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
