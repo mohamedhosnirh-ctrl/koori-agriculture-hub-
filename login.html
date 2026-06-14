@@ -16,7 +16,7 @@
     (function() {
       if (localStorage.getItem('loggedIn') === 'true') {
         var params = new URLSearchParams(location.search);
-        window.location.replace(params.get('redirect') || 'products.html');
+        window.location.replace(params.get('redirect') || 'already-logged-in.html');
       }
     })();
   </script>

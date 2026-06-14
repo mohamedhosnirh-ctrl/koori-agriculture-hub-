@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>koori — Already Logged In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="buttons.css">
+  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="utilities.css">
+  <style>
+    body { display: flex; flex-direction: column; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative blobs matching login page */
+    main::before, main::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: .18;
+      pointer-events: none;
+    }
+    main::before {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      top: -120px; right: -100px;
+    }
+    main::after {
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, var(--brown) 0%, transparent 70%);
+      bottom: -80px; left: -60px;
+    }
+
+    .already-card {
+      background: var(--white);
+      border-radius: 24px;
+      border: 1.5px solid #f0e6d6;
+      box-shadow: 0 20px 60px rgba(123,79,30,.13);
+      padding: 2.8rem 2.5rem 2.5rem;
+      width: 100%; max-width: 420px;
+      position: relative; z-index: 1;
+      animation: cardIn .5s cubic-bezier(.22,1,.36,1) both;
+      text-align: center;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(28px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .already-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--brown-dark), var(--brown));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 6px 20px rgba(123,79,30,.25);
+    }
+
+    .already-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.75rem; color: var(--brown);
+      margin-bottom: .3rem;
+    }
+
+    .already-subtitle {
+      color: var(--text-muted);
+      font-size: .95rem; margin-bottom: 2rem;
+    }
+
+    .already-email {
+      display: inline-block;
+      background: var(--cream-dark);
+      border-radius: 99px;
+      padding: .35rem 1.2rem;
+      font-size: .9rem;
+      color: var(--brown);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .already-actions {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .already-actions .btn { width: 100%; }
+
+    .site-footer {
+      background: var(--brown-dark);
+      padding: 1.25rem 2.5rem;
+      text-align: center;
+      color: rgba(255,255,255,.4); font-size: .88rem;
+    }
+
+    @media (max-width: 768px) {
+      .already-card { padding: 2rem 1.4rem 1.8rem; }
+      .nav-icons  { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!--  NAVBAR  -->
+<header role="banner">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="koori-bg">
+            <span class="koori-logo">
+                <a href="index.html" class="link-logo" aria-label="koori home">
+                <span class="koori-letter1" aria-hidden="true">k</span>
+                <span class="koori-letter2" aria-hidden="true">o</span>
+                <span class="koori-letter3" aria-hidden="true">o</span>
+                <span class="koori-letter4" aria-hidden="true">r</span>
+                <span class="koori-letter5" aria-hidden="true">i</span>
+                </a>
+            </span>
+        </div>
+        <div class="search-box">
+          <input type="text" placeholder="Search products…" id="navSearch" aria-label="Search products" autocomplete="off"/>
+          <button type="reset" aria-label="Clear search"></button>
+          <div class="search-results" id="searchResults" role="listbox" aria-label="Search suggestions"></div>
+        </div>
+        <ul class="nav-links" role="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="categories.html">news</a></li>
+            <li><a href="#" id="addItemLink">Add Item</a></li>
+            <li><a href="cart.html">Cart <span id="cartCount" aria-live="polite" aria-label="items in cart"></span></a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-icons">
+            <a href="already-logged-in.html" class="login-btn" id="dashboardBtn">Dashboard</a>
+        </div>
+        <div class="language-switcher">
+            <select id="languageSelect" aria-label="Select language">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+                <option value="it">IT</option>
+            </select>
+        </div>
+    </nav>
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">news</a>
+        <a href="#" id="addItemLinkMobile">Add Item</a>
+        <a href="cart.html">Cart</a>
+        <a href="contact.html">Contact</a>
+        <a href="already-logged-in.html">Dashboard</a>
+    </nav>
+</header>
+
+<!--  MAIN  -->
+<main>
+  <div class="already-card">
+    <div class="already-icon">🌿</div>
+    <h1 class="already-title">You're already logged in</h1>
+    <p class="already-subtitle">You are signed in to your koori account</p>
+    <span class="already-email" id="userEmailDisplay">Loading…</span>
+
+    <div class="already-actions">
+      <a href="products.html" class="btn btn-primary">Go to Dashboard</a>
+      <a href="login.html" class="btn btn-outline" id="logoutBtn">Logout</a>
+    </div>
+  </div>
+</main>
+
+<!--  FOOTER  -->
+<footer class="site-footer">
+  &copy; 2026 koori. All rights reserved.
+</footer>
+
+<script>
+  (function() {
+    // If not logged in, redirect to login page
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.replace('login.html');
+      return;
+    }
+
+    // Show the logged-in user's email
+    const emailDisplay = document.getElementById('userEmailDisplay');
+    if (emailDisplay) {
+      const accounts = JSON.parse(localStorage.getItem('kooriAccounts') || '[]');
+      const loggedInEmail = localStorage.getItem('loggedInEmail') || '';
+      const acct = accounts.find(a => a.email === loggedInEmail);
+      if (acct && acct.name) {
+        emailDisplay.textContent = acct.name + ' · ' + loggedInEmail;
+      } else if (loggedInEmail) {
+        emailDisplay.textContent = loggedInEmail;
+      }
+    }
+
+    // Logout handler
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.setItem('loggedIn', 'false');
+        localStorage.removeItem('loggedInEmail');
+        window.location.href = 'login.html';
+      });
+    }
+  })();
+
+  // Hamburger menu
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', function() {
+        const isOpen = mobileNav.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+      document.addEventListener('click', function(e) {
+        if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
